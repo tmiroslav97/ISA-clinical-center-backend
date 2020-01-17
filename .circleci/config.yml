@@ -44,7 +44,6 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: clinic_center
-          MYSQL_PASSWORD: root
 
     working_directory: ~/repo
 
