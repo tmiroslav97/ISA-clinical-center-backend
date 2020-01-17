@@ -82,8 +82,7 @@ jobs:
       - run:
           name: Install MySQL CLI; Import dummy data; 
           command: |
-            FROM circleci/openjdk:8-jdk
-            RUN sudo bash -c "apt-get update && apt-get install -y mysql-client"
+            sudo apt install mysql-server
             mysql -h 127.0.0.1 -u root root clinic_center < src/main/resources/data-mysql.sql
 
       - run: mvn test
