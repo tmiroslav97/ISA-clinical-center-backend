@@ -82,7 +82,7 @@ jobs:
       - run:
           name: Install MySQL CLI; Import dummy data; 
           command: |
-            sudo apt install mysql-server
+            cat /etc/os-release
             mysql -h 127.0.0.1 -u root root clinic_center < src/main/resources/data-mysql.sql
 
       - run: mvn test
