@@ -84,6 +84,7 @@ jobs:
           command: |
             sudo apt update
             sudo apt install mysql-client
+            ls -a
             mysql -h 127.0.0.1 -u root root clinic_center < src/main/resources/data-mysql.sql
 
       - run: mvn test
