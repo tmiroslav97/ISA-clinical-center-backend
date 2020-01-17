@@ -40,6 +40,13 @@ jobs:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
 
+      - image: circleci/mysql:5.7.28
+        environment:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: clinic_center
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root
+
     working_directory: ~/repo
 
     environment:
@@ -62,6 +69,24 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      - run:
+      # Our primary container isn't MYSQL so run a sleep command until it's ready.
+          name: Waiting for MySQL to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
+      - run:
+          name: Install MySQL CLI; Import dummy data; 
+          command: |
+            sudo apt-get install default-mysql-client
+            mysql -h 127.0.0.1 -u root root clinic_center < src/main/resources/data-mysql.sql
+            
       - run: mvn test
 
 workflows:
