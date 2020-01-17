@@ -27,10 +27,10 @@ public class Doctor extends Personnel {
     @Column(name = DbColumnConstants.CNTRATING, unique = false, nullable = false)
     private Integer cntRating;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<AppointmentRequirement> appReqs;
 
-    @Column(name = DbColumnConstants.STARTTIME , unique = false, nullable = false)
+    @Column(name = DbColumnConstants.STARTTIME, unique = false, nullable = false)
     private Integer startTime;
 
     @Column(name = DbColumnConstants.ENDTIME, unique = false, nullable = false)
@@ -39,10 +39,10 @@ public class Doctor extends Personnel {
     @Builder(builderMethodName = "doctorBuilder")
     public Doctor(Long id, String email, String password, String firstName, String lastName,
                   boolean enabled, RoleEnum role, boolean isFirstLog, Timestamp lastPasswordResetDate,
-                  List<Authority> authorities, Set<Patient> patients, Clinic clinic, Calendar calendar,
+                  List<Authority> authorities, Clinic clinic, Calendar calendar,
                   Set<AbsenceRequirement> absenceRequirements, Set<Appointment> appointments, Float sumRating,
                   Integer cntRating, Set<AppointmentRequirement> appReqs, Integer startTime, Integer endTime) {
-        super(id, email, password, firstName, lastName, enabled, role, isFirstLog, lastPasswordResetDate, authorities, patients, clinic, calendar, absenceRequirements, appointments);
+        super(id, email, password, firstName, lastName, enabled, role, isFirstLog, lastPasswordResetDate, authorities, clinic, calendar, absenceRequirements, appointments);
         this.sumRating = sumRating;
         this.cntRating = cntRating;
         this.appReqs = appReqs;

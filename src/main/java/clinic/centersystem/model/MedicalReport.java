@@ -19,14 +19,11 @@ public class MedicalReport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = DbColumnConstants.DESCRIPTION, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.DESCRIPTION, nullable = false)
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Diagnose> diagnoses;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Recepie> recepies;
+    @OneToMany(mappedBy = "medicalReport", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Prescription> prescriptions;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Appointment appointment;

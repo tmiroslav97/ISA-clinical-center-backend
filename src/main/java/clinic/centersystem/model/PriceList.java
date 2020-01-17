@@ -19,7 +19,7 @@ public class PriceList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "priceList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<PriceListItem> items;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

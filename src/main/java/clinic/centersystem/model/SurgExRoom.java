@@ -2,17 +2,18 @@ package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+
 @Builder
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = DbTableConstants.SURGEXROOM)
 public class SurgExRoom {
 
@@ -28,15 +29,6 @@ public class SurgExRoom {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Clinic clinic;
-
-    @Builder(builderMethodName = "surgExRoomBuilder")
-    public SurgExRoom(Long id, Integer number, String name, Clinic clinic) {
-        // TODO: implement
-        this.id=id;
-        this.number=number;
-        this.name=name;
-        this.clinic=clinic;
-    }
 
 
 }

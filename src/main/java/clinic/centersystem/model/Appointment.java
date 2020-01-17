@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name = DbTableConstants.APPOINT)
+@Table(name = DbTableConstants.APPOINTMENT)
 public class Appointment {
 
     @Id
@@ -40,7 +40,7 @@ public class Appointment {
     private SurgExRoom surgExRoom;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Doctor doctor;
+    private Personnel personnel;
 
     @Column(name = DbColumnConstants.PRICE, unique = false, nullable = false)
     private Float price;

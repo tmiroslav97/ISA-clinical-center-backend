@@ -19,7 +19,7 @@ public class MedicalRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<MedicalReport> diseaseHistory;
 
     @Column(name = DbColumnConstants.DESCRIPTION, unique = false, nullable = false)

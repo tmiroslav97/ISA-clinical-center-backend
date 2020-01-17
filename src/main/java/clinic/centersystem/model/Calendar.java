@@ -25,7 +25,7 @@ public class Calendar {
     private Personnel personnel;
 
     @JsonBackReference
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "calendar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<CalendarItem> calendarItems = new HashSet<CalendarItem>();
 
 }

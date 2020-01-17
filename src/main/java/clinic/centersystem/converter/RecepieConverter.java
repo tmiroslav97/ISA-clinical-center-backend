@@ -1,13 +1,13 @@
 package clinic.centersystem.converter;
 
 import clinic.centersystem.dto.response.RecepieResponse;
-import clinic.centersystem.model.Recepie;
+import clinic.centersystem.model.Prescription;
 
 public class RecepieConverter {
 
-    public static RecepieResponse toCreateRecepieResponseFromRecepie(Recepie recepie) {
+    public static RecepieResponse toCreateRecepieResponseFromRecepie(Prescription prescription) {
         return RecepieResponse.builder()
-                .id(recepie.getId())
+                .id(prescription.getId())
                 .build();
     }
 

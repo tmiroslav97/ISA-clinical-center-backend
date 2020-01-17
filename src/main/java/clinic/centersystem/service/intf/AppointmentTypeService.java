@@ -12,4 +12,6 @@ public interface AppointmentTypeService {
     AppointmentType save(AppointmentType appointmentType);
 
     public void remove(Long id);
+
+    List<AppointmentType> getAppointmentType();
 }

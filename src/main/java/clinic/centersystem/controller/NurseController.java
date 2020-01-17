@@ -1,9 +1,8 @@
 package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.response.NurseResponse;
-import clinic.centersystem.dto.response.PatientResponse;
 import clinic.centersystem.dto.response.RecepieResponse;
-import clinic.centersystem.service.NurseServiceCont;
+import clinic.centersystem.service.NurseServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,26 +18,26 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping(value = "/nurse", produces = MediaType.APPLICATION_JSON_VALUE)
 public class NurseController {
 
-    private final NurseServiceCont nurseServiceCont;
+    private final NurseServiceImpl nurseService;
 
 
-    public NurseController(NurseServiceCont nurseServiceCont) {
-        this.nurseServiceCont = nurseServiceCont;
+    public NurseController(NurseServiceImpl nurseService) {
+        this.nurseService = nurseService;
     }
 
     @RequestMapping(method = GET, value = "/{nurseId}")
     public ResponseEntity<NurseResponse> getNurseById(@PathVariable Long nurseId) {
-        return new ResponseEntity<>(this.nurseServiceCont.getNurseById(nurseId), HttpStatus.OK);
+        return new ResponseEntity<>(this.nurseService.getNurseById(nurseId), HttpStatus.OK);
     }
 
     @RequestMapping(method = POST, value = "/rewrite/{nurseId}/{recepieId}")
     public ResponseEntity<String> rewriteRecepie(@PathVariable Long nurseId, @PathVariable Long recepieId) {
-        return new ResponseEntity<>(this.nurseServiceCont.rewriteRecepie(nurseId, recepieId), HttpStatus.OK);
+        return new ResponseEntity<>(this.nurseService.rewriteRecepie(nurseId, recepieId), HttpStatus.OK);
     }
 
     @RequestMapping(method = GET, value = "/recepies")
     public ResponseEntity<List<RecepieResponse>> getRecepies() {
-        return new ResponseEntity<>(this.nurseServiceCont.getRecepies(), HttpStatus.OK);
+        return new ResponseEntity<>(this.nurseService.getRecepies(), HttpStatus.OK);
     }
 
 }

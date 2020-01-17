@@ -2,12 +2,14 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.ClinicConverter;
 import clinic.centersystem.dto.request.ClinicRequestDTO;
+import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.model.Clinic;
 import clinic.centersystem.repository.ClinicRepository;
 import clinic.centersystem.service.intf.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -44,5 +46,15 @@ public class ClinicServiceImpl implements ClinicService {
     @Override
     public boolean existsByName(String name) {
         return clinicRepository.existsByName(name);
+    }
+
+    public List<ClinicResponse> getClinics() {
+        List<Clinic> clinics = this.findAll();
+        List<ClinicResponse> clinicResponses = new ArrayList<ClinicResponse>();
+        for(Clinic clinic : clinics) {
+            clinicResponses.add(ClinicConverter.toCreateClinicResponseFromClinic(clinic));
+        }
+
+        return clinicResponses;
     }
 }

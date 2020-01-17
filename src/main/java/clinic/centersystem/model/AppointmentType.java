@@ -23,7 +23,7 @@ public class AppointmentType {
     @Column(name = DbColumnConstants.TYPE, unique = true, nullable = false)
     private String type;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "type", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Appointment> appointments;
 
 

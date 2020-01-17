@@ -23,6 +23,10 @@ public class AppointmentTypeServiceImpl implements AppointmentTypeService {
     @Override
     public AppointmentType save(AppointmentType appointmentType){return this.appointmentTypeRepository.save(appointmentType);}
 
+    @Override
     public void remove(Long id){this.appointmentTypeRepository.deleteById(id);}
+
+    @Override
+    public List<AppointmentType> getAppointmentType(){ return this.findAll();}
 
 }

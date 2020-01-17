@@ -5,7 +5,7 @@ import clinic.centersystem.dto.request.CCARegReqDTO;
 import clinic.centersystem.exception.CCANotPredefinedException;
 import clinic.centersystem.exception.UserExistsException;
 import clinic.centersystem.exception.UserNotFoundException;
-import clinic.centersystem.service.ClinicCenterAdminServiceCont;
+import clinic.centersystem.service.ClinicCenterAdminServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class ClinicCenterAdministratorControllerTest {
     private TestRestTemplate testRestTemplate;
 
     @MockBean
-    private ClinicCenterAdminServiceCont clinicCenterAdminServiceContMock;
+    private ClinicCenterAdminServiceImpl clinicCenterAdminServiceMock;
 
     private static final String REG_CA_ENDPOINT_NOT_VALID = "/cca/reg-cca/2";
     private static final Long ADMIN_ID_NOT_VALID = Long.valueOf(2);
@@ -38,7 +38,7 @@ public class ClinicCenterAdministratorControllerTest {
 
     @Test
     public void registerCCAShouldReturnNotFoundWhenUserNotFoundExceptionIsThrown(){
-        when(clinicCenterAdminServiceContMock.registerCCA(ccaRegReqDTONotValid, ADMIN_ID_NOT_VALID)).thenThrow(UserNotFoundException.class);
+        when(clinicCenterAdminServiceMock.registerCCA(ccaRegReqDTONotValid, ADMIN_ID_NOT_VALID)).thenThrow(UserNotFoundException.class);
 
         ResponseEntity<String> responseEntity = testRestTemplate.postForEntity(REG_CA_ENDPOINT_NOT_VALID, ccaRegReqDTONotValid, String.class);
 
@@ -49,7 +49,7 @@ public class ClinicCenterAdministratorControllerTest {
 
     @Test
     public void registerCCAShouldReturnBadRequestWhenCCANotPredefinedExceptionIsThrown(){
-        when(clinicCenterAdminServiceContMock.registerCCA(ccaRegReqDTOValid, ADMIN_ID_VALID)).thenThrow(CCANotPredefinedException.class);
+        when(clinicCenterAdminServiceMock.registerCCA(ccaRegReqDTOValid, ADMIN_ID_VALID)).thenThrow(CCANotPredefinedException.class);
 
         ResponseEntity<String> responseEntity = testRestTemplate.postForEntity(REG_CA_ENDPOINT_VALID, ccaRegReqDTOValid, String.class);
 
@@ -60,7 +60,7 @@ public class ClinicCenterAdministratorControllerTest {
 
     @Test
     public void registerCCAShouldReturnBadRequestWhenUserExistsExceptionIsThrown(){
-        when(clinicCenterAdminServiceContMock.registerCCA(ccaRegReqDTOValid, ADMIN_ID_VALID)).thenThrow(UserExistsException.class);
+        when(clinicCenterAdminServiceMock.registerCCA(ccaRegReqDTOValid, ADMIN_ID_VALID)).thenThrow(UserExistsException.class);
 
         ResponseEntity<String> responseEntity = testRestTemplate.postForEntity(REG_CA_ENDPOINT_VALID, ccaRegReqDTONotValid, String.class);
 
@@ -71,7 +71,7 @@ public class ClinicCenterAdministratorControllerTest {
 
     @Test
     public void registerCCAShouldReturnOkAndMessageWhenRegisterIsSuccessful(){
-        when(clinicCenterAdminServiceContMock.registerCCA(ccaRegReqDTOValid, ADMIN_ID_VALID)).thenReturn("Successfully added new clinic center administrator");
+        when(clinicCenterAdminServiceMock.registerCCA(ccaRegReqDTOValid, ADMIN_ID_VALID)).thenReturn("Successfully added new clinic center administrator");
 
         ResponseEntity<String> responseEntity = testRestTemplate.postForEntity(REG_CA_ENDPOINT_VALID, ccaRegReqDTOValid, String.class);
 

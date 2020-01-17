@@ -12,7 +12,5 @@ import lombok.NoArgsConstructor;
 public class AppointmentTypeResponse {
     private Long id;
     private String type;
-    //private Long appointmentId;
 
-    
 }

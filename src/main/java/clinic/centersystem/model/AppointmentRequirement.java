@@ -31,7 +31,7 @@ public class AppointmentRequirement {
     private AppStateEnum appState;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private User aplicant;
+    private Patient patient;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Clinic clinic;

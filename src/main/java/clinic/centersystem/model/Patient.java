@@ -60,13 +60,13 @@ public class Patient extends User {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private MedicalRecord medicalRecord;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Appointment> appointments;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<AppointmentRequirement> appointmentRequirements;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Surgery> surgeries;
 
     @Column(name = DbColumnConstants.ISACTIVATED, nullable = false)
