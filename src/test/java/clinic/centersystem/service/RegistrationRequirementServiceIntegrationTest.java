@@ -27,24 +27,10 @@ public class RegistrationRequirementServiceIntegrationTest {
     @Autowired
     private RegistrationRequirementRepository registrationRequirementRepository;
 
-    private static final Long USER_EXISTS_ID = 1L;
-    private static final String USER_EXISTS_EMAIL = "tomic.miroslav97@gmail.com";
-    private static final Long REG_REQ_EXISTS_USER = 4L;
     private static final Long REG_REQ_NOT_VALID = 15L;
-    private static final Long REG_REQ_VALID = 1L;
     private static final String MESSAGE = "Not enough information";
     private static final Long REG_REQ_ID_VALID = 4L;
-    private static final String ADDRESS_VALID = "Safarikova 31";
-    private static final String CITY_VALID = "Bijeljina";
-    private static final String COUNTRY_VALID = "Bosna";
-    private static final String EMAIL_VALID = "tomic.miroslav97@gmail.com";
-    private static final String FIRST_NAME_VALID = "Miki";
-    private static final String LAST_NAME_VALID = "Peric";
-    private static final String PASSWORD_VALID = "123";
-    private static final String PASSWORD2_VALID = "123";
-    private static final String PHONE_NUME_VALID = "065987654";
-    private static final String UNOIP_VALID = "1234543";
-    private static final Long VERSION_VALID = 0L;
+
 
 
     @Test(expected = ResourceExistsException.class)

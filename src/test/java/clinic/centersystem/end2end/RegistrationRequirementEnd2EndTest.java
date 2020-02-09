@@ -136,33 +136,33 @@ public class RegistrationRequirementEnd2EndTest {
         assertEquals("http://localhost:3000/ccadmin/reg-req", browser.getCurrentUrl());
     }
 
+//    @Test
+//    @Order(4)
+//    public void rejectRegistrationRequirementWrongMail() throws InterruptedException {
+//        clinicCenterAdminPage.ensureIsDisplayedBtnRegReqs();
+//        clinicCenterAdminPage.getBtnRegReqs().click();
+//
+//        registrationRequirementPage.ensureIsDisplayedRegReqPag();
+//        registrationRequirementPage.ensureIsDisplayedRegReqTable();
+//        WebElement btnModal = registrationRequirementPage.getRowsRefuse().get(5);
+//        btnModal.click();
+//
+//        registrationRequirementPage.ensureIsDisplayedRegReqModal();
+//        registrationRequirementPage.ensureIsDisplayedTxtReason();
+//        registrationRequirementPage.ensureIsDisplayedBtnReject();
+//
+//        registrationRequirementPage.getTxtReason().sendKeys("Not enough information");
+//        registrationRequirementPage.getBtnReject().click();
+//
+//        registrationRequirementPage.ensureIsDisplayedToastMsg();
+//        String msg = registrationRequirementPage.getToastMsg().getText();
+//
+//        assertEquals("Email address is invalid", msg);
+//        assertEquals("http://localhost:3000/ccadmin/reg-req", browser.getCurrentUrl());
+//    }
+
     @Test
     @Order(4)
-    public void rejectRegistrationRequirementWrongMail() throws InterruptedException {
-        clinicCenterAdminPage.ensureIsDisplayedBtnRegReqs();
-        clinicCenterAdminPage.getBtnRegReqs().click();
-
-        registrationRequirementPage.ensureIsDisplayedRegReqPag();
-        registrationRequirementPage.ensureIsDisplayedRegReqTable();
-        WebElement btnModal = registrationRequirementPage.getRowsRefuse().get(5);
-        btnModal.click();
-
-        registrationRequirementPage.ensureIsDisplayedRegReqModal();
-        registrationRequirementPage.ensureIsDisplayedTxtReason();
-        registrationRequirementPage.ensureIsDisplayedBtnReject();
-
-        registrationRequirementPage.getTxtReason().sendKeys("Not enough information");
-        registrationRequirementPage.getBtnReject().click();
-
-        registrationRequirementPage.ensureIsDisplayedToastMsg();
-        String msg = registrationRequirementPage.getToastMsg().getText();
-
-        assertEquals("Email address is invalid", msg);
-        assertEquals("http://localhost:3000/ccadmin/reg-req", browser.getCurrentUrl());
-    }
-
-    @Test
-    @Order(5)
     public void rejectRegistrationRequirementWhenUserExists() throws InterruptedException {
         clinicCenterAdminPage.ensureIsDisplayedBtnRegReqs();
         clinicCenterAdminPage.getBtnRegReqs().click();
@@ -187,7 +187,7 @@ public class RegistrationRequirementEnd2EndTest {
     }
 
     @Test
-    @Order(6)
+    @Order(5)
     public void approveRegistrationRequirementWhenUserExists() throws InterruptedException {
         clinicCenterAdminPage.ensureIsDisplayedBtnRegReqs();
         clinicCenterAdminPage.getBtnRegReqs().click();

@@ -52,7 +52,6 @@ public class UserServiceImpl implements UserService {
         User user = this.findById(userEditReqDTO.getId());
         user.setFirstName(userEditReqDTO.getFirstName());
         user.setLastName(userEditReqDTO.getLastName());
-        user.setEmail(userEditReqDTO.getEmail());
         userRepository.save(user);
         return "Successfully edited users profile";
     }

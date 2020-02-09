@@ -1,0 +1,15 @@
+export const FETCH_SUR_REQ_DATA ='fetch_sur_req_data';
+export const PUT_SUR_REQ_DATA = 'put_sur_req_data'; 
+export const PUT_IS_FETCH_SUR_REQ_DATA = "put_is_fetch_sur_req_data";
+export const PUT_SUR_REQ_PAGE_COUNT = "put_sur_req_page_count";
+export const PUT_PICK_SUR_REQ = "put_pick_sur_req";
+export const FETCH_PICK_SUR_ROOM = "fetch_pick_sur_room";
+export const PUT_PICKED_SUR_REQ = "put_picked_sur_req";
+export const PUT_PICK_TERM = "put_pick_term";
+export const FETCH_PICK_DOC = "fetch_pick_doc";
+export const PUT_PICKED_TERM = "put_picked_term";
+export const PUT_PICKED_ROOM = "put_picked_room";
+export const FETCH_FINISH_RESERVATION = "fetch_finish_reservation";
+export const PUT_RESERVATION_SUR_REQ_RESPONSE = "put_reservation_sur_req_response";
+export const PUT_IS_FETCH_SUR_REQ_RESPONSE = "put_is_fetch_req_response";
+export const FETCH_PUT_IS_FETCH_SUR_REQ_RESPONSE = "fetch_put_is_fetch_req_response";

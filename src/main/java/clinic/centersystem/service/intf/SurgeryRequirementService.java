@@ -23,4 +23,6 @@ public interface SurgeryRequirementService {
 
     void delete(SurgeryRequirement surgeryRequirement);
 
+    int helperReserve(SurgeryReservationReqDTO surgeryReservationReqDTO);
+
 }

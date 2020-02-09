@@ -1,5 +1,6 @@
 package clinic.centersystem.service;
 
+import clinic.centersystem.dto.request.MailRequestDTO;
 import clinic.centersystem.exception.RegistrationRequirementNotFoundException;
 import clinic.centersystem.exception.ResourceExistsException;
 import clinic.centersystem.model.*;
@@ -10,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -39,8 +41,11 @@ public class RegistrationRequirementServiceUnitTest {
     @MockBean
     private PasswordEncoder passwordEncoderMock;
 
-    @MockBean
-    private EmailService emailServiceMock;
+//    @MockBean
+//    private EmailService emailServiceMock;
+
+//    @MockBean
+//    private ApplicationEventPublisher applicationEventPublisherMock;
 
     @Autowired
     private RegistrationRequirementService registrationRequirementService;
@@ -69,7 +74,7 @@ public class RegistrationRequirementServiceUnitTest {
         when(registrationRequirementRepositoryMock.findById(1L)).thenReturn(Optional.of(registrationRequirement));
         when(userServiceMock.existsByEmail(USER_EXISTS_EMAIL)).thenReturn(false);
 
-        int flag = registrationRequirementService.rejectRegistrationRequest(1L,"");
+        int flag = registrationRequirementService.rejectRegistrationRequest(1L, "");
         assertEquals(1, flag);
     }
 
@@ -81,9 +86,9 @@ public class RegistrationRequirementServiceUnitTest {
         when(registrationRequirementRepositoryMock.findById(1L)).thenReturn(Optional.of(registrationRequirement));
         when(userServiceMock.existsByEmail(USER_EXISTS_EMAIL)).thenReturn(false);
 
-        int flag = registrationRequirementService.rejectRegistrationRequest(1L,"Rejected");
-        verify(emailServiceMock, times(1)).sendSyncMailTo("miroslav.tomic@outlook.com", "Account registration",
-                "Rejected");
+        int flag = registrationRequirementService.rejectRegistrationRequest(1L, "Rejected");
+        //verify(applicationEventPublisherMock, times(1)).publishEvent(new MailRequestDTO("miroslav.tomic@outlook.com", "Account registration",
+                //"Rejected"));
         verify(registrationRequirementRepositoryMock, times(1)).deleteById(1L);
         assertEquals(2, flag);
     }
@@ -100,17 +105,17 @@ public class RegistrationRequirementServiceUnitTest {
                 true, true, null,
                 authorities, ADDRESS_VALID, COUNTRY_VALID, CITY_VALID, PHONE_NUME_VALID, UNOIP_VALID,
                 new HashSet<>(), new MedicalRecord(), new HashSet<>(), new HashSet<>(),
-                new HashSet<>(), false,0L);
+                new HashSet<>(), false, 0L);
         when(registrationRequirementRepositoryMock.findById(1L)).thenReturn(Optional.of(registrationRequirement));
         when(userServiceMock.existsByEmail(USER_EXISTS_EMAIL)).thenReturn(false);
         when(patientServiceMock.save(registrationRequirement)).thenReturn(patient);
 
         String succcMsg = registrationRequirementService.approveRegistrationRequest(1L);
         verify(passwordEncoderMock, times(1)).encode(PASSWORD_VALID);
-        verify(emailServiceMock, times(1)).sendSyncMailTo("miroslav.tomic@outlook.com", "Account registration",
-                "    Patient account created successfully!\n" +
-                        "    Please follow this link to activate account:\n" +
-                        "    http://localhost:8080/sec/activate-account/1");
+//        verify(applicationEventPublisherMock, times(1)).publishEvent(new MailRequestDTO("miroslav.tomic@outlook.com", "Account registration",
+//                "    Patient account created successfully!\n" +
+//                        "    Please follow this link to activate account:\n" +
+//                        "    http://localhost:8080/sec/activate-account/1"));
         assertEquals("Patient registration approved", succcMsg);
     }
 
