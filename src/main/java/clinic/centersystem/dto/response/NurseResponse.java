@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Builder
 @Data
 @NoArgsConstructor
@@ -19,7 +21,7 @@ public class NurseResponse {
 
     private String email;
 
-    private String role;
+    private List<String> roles;
 
     private Long clinicId;
 }

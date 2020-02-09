@@ -8,6 +8,7 @@ import clinic.centersystem.model.RegistrationRequirement;
 import clinic.centersystem.model.enumeration.RoleEnum;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class PatientConverter {
 
@@ -25,18 +26,19 @@ public class PatientConverter {
                 .enabled(true)
                 .isFirstLog(true)
                 .phoneNum(registrationRequirement.getPhoneNum())
-                .role(RoleEnum.ROLE_PATIENT)
                 .unoip(registrationRequirement.getUnoip())
                 .build();
     }
 
     public static PatientResponse toCreatePatientResponseFromPatient(Patient patient) {
         return PatientResponse.builder()
+                .id(patient.getId())
                 .firstName(patient.getFirstName())
                 .lastName(patient.getLastName())
                 .email(patient.getEmail())
                 .country(patient.getCountry())
                 .city(patient.getCity())
+                .roles(patient.getAuthorities().stream().map(authority -> authority.getName()).collect(Collectors.toList()))
                 .address(patient.getAddress())
                 .phoneNum(patient.getPhoneNum())
                 .unoip(patient.getUnoip())

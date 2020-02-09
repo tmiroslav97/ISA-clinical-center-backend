@@ -31,4 +31,17 @@ public class EmailService {
         System.out.println("Mail sent!");
     }
 
+    public void sendSyncMailTo(String email, String subject, String message) {
+
+        SimpleMailMessage mail = new SimpleMailMessage();
+        mail.setTo(email);
+        mail.setFrom(env.getProperty("spring.mail.username"));
+        mail.setSubject(subject);
+        mail.setText(message);
+        javaMailSender.send(mail);
+
+
+        System.out.println("Mail sent!");
+    }
+
 }

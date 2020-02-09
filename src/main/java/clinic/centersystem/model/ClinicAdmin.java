@@ -20,14 +20,14 @@ import java.util.List;
 @Table(name = DbTableConstants.CLINICADMIN)
 public class ClinicAdmin extends User {
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Clinic clinic;
 
     @Builder(builderMethodName = "clinicAdminBuilder")
     public ClinicAdmin(Long id, String email, String password, String firstName, String lastName,
-                             boolean enabled, RoleEnum role, boolean isFirstLog, Timestamp lastPasswordResetDate,
-                             List<Authority> authorities, boolean predefined) {
-        super(id, email, password, firstName, lastName, enabled, role, isFirstLog, lastPasswordResetDate, authorities);
+                             boolean enabled, boolean isFirstLog, Timestamp lastPasswordResetDate,
+                             List<Authority> authorities, Long version) {
+        super(id, email, password, firstName, lastName, enabled, isFirstLog, lastPasswordResetDate, authorities, version);
     }
 
 }

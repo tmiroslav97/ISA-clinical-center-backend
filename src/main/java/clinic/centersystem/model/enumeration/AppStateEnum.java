@@ -1,5 +1,5 @@
 package clinic.centersystem.model.enumeration;
 
 public enum AppStateEnum {
-    REQUIRED, PENDING, APPROVED, REJECTED, STARTED, FINISHED
+    REQUIRED, APPROVED, REJECTED, STARTED, FINISHED
 }

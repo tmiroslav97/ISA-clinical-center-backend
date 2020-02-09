@@ -5,6 +5,7 @@ import clinic.centersystem.converter.UserConverter;
 import clinic.centersystem.dto.request.RegistrationRequirementDTO;
 import clinic.centersystem.dto.response.LoginUserResponse;
 import clinic.centersystem.dto.request.PasswordChangerRequestDTO;
+import clinic.centersystem.model.Patient;
 import clinic.centersystem.model.RegistrationRequirement;
 import clinic.centersystem.model.User;
 import clinic.centersystem.security.TokenUtils;
@@ -23,6 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Service
 @RequiredArgsConstructor
@@ -51,7 +53,7 @@ public class AuthenticationService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public LoginUserResponse login(HttpServletRequest request, JwtAuthenticationRequest jwtAuthenticationRequest) {
+    public LoginUserResponse login(JwtAuthenticationRequest jwtAuthenticationRequest) {
         final Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(jwtAuthenticationRequest.getUsername(),
                         jwtAuthenticationRequest.getPassword()));
@@ -87,6 +89,16 @@ public class AuthenticationService {
         LoginUserResponse loginUserResponse = UserConverter.toCreateUserLoginResponse(user, jwt);
 
         return loginUserResponse;
+    }
+
+
+    public String activateAccount(Long id, HttpServletResponse httpServletResponse) {
+        Patient patient = this.patientService.findById(id);
+        patient.setActivated(true);
+        patient = this.patientService.save(patient);
+
+        httpServletResponse.setHeader("Location", "http://localhost:3000/login");
+        return "Account is activated!";
     }
 
 }

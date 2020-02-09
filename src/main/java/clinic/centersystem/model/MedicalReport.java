@@ -3,14 +3,19 @@ package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
+@Builder
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = DbTableConstants.MEDICALREPORT)
 public class MedicalReport {
@@ -22,17 +27,21 @@ public class MedicalReport {
     @Column(name = DbColumnConstants.DESCRIPTION, nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "medicalReport", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Prescription> prescriptions;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
     private Appointment appointment;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     private MedicalRecord medicalRecord;
 
-    public MedicalReport() {
-        // TODO: implement
-    }
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Diagnose diagnose;
+
+    @JsonIgnore
+    @Builder.Default
+    @OneToMany(mappedBy = "medicalReport", fetch = FetchType.LAZY)
+    private Set<Prescription> prescriptions = new HashSet<>();
 
 }

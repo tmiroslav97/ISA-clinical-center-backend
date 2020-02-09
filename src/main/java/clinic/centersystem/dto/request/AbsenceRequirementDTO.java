@@ -12,9 +12,9 @@ public class AbsenceRequirementDTO {
 
     private String type;
 
-    private Long startDate;
+    private String startDate;
 
-    private Long endDate;
+    private String endDate;
 
     private Long personnelId;
 

@@ -19,7 +19,6 @@ public class RegistrationRequirement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = DbColumnConstants.ID, unique = true, nullable = false)
-
     private Long id;
 
     @Column(name = DbColumnConstants.FIRSTNAME, nullable = false)
@@ -35,7 +34,6 @@ public class RegistrationRequirement {
     private String password;
 
     @Column(name = DbColumnConstants.PASSWORD2, nullable = false)
-
     private String password2;
 
     @Column(name = DbColumnConstants.ADDRESS, nullable = false)
@@ -53,5 +51,7 @@ public class RegistrationRequirement {
     @Column(name = DbColumnConstants.UNOIP, nullable = false)
     private String unoip;
 
+    @Version
+    private Long version;
 
 }

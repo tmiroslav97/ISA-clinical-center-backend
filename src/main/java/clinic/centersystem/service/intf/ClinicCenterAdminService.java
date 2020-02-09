@@ -21,21 +21,15 @@ public interface ClinicCenterAdminService {
 
     ClinicCenterAdminResponse clinicCenterAdmin(Long id);
 
-    List<RegistrationRequirementResponse> registrationRequirementList();
-
-    String approveRegistrationRequest(Long id);
-
-    String rejectRegistrationRequest(Long id, String message);
-
     String registerCCA(CCARegReqDTO ccaRegReqDTO, Long id);
 
-    String activateAccount(Long id, HttpServletResponse httpServletResponse);
+    //String activateAccount(Long id, HttpServletResponse httpServletResponse);
 
-    boolean registerClinic(ClinicRequestDTO clinicRequestDTO);
+    //boolean registerClinic(ClinicRequestDTO clinicRequestDTO);
 
-    List<ClinicResponse> getClinics();
+    //List<ClinicResponse> getClinics();
 
-    String registerClinicAdmin(ClinicAdminReqDTO clinicAdminReqDTO);
+    //String registerClinicAdmin(ClinicAdminReqDTO clinicAdminReqDTO);
 
 
 }

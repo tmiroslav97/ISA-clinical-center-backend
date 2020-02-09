@@ -5,14 +5,16 @@ import clinic.centersystem.dto.response.ClinicCenterAdminResponse;
 import clinic.centersystem.model.ClinicCenterAdmin;
 import clinic.centersystem.model.enumeration.RoleEnum;
 
+import java.util.stream.Collectors;
+
 public class ClinicCenterAdminConverter {
 
     public static ClinicCenterAdminResponse toCreateClinicCenterAdminResponse(ClinicCenterAdmin clinicCenterAdmin) {
         return ClinicCenterAdminResponse.builder()
                 .id(clinicCenterAdmin.getId())
                 .email(clinicCenterAdmin.getEmail())
-                .role(clinicCenterAdmin.getRole().name())
-                .isNotFirstLogin(clinicCenterAdmin.isFirstLog())
+                .roles(clinicCenterAdmin.getAuthorities().stream().map(authority -> authority.getName()).collect(Collectors.toList()))
+                .firstLogin(clinicCenterAdmin.isFirstLog())
                 .predefined(clinicCenterAdmin.isPredefined())
                 .build();
     }
@@ -23,7 +25,6 @@ public class ClinicCenterAdminConverter {
                 .firstName(ccaRegReqDTO.getFirstName())
                 .lastName(ccaRegReqDTO.getLastName())
                 .isFirstLog(true)
-                .role(RoleEnum.ROLE_CCADMIN)
                 .enabled(true)
                 .password(ccaRegReqDTO.getPassword())
                 .predefined(false)

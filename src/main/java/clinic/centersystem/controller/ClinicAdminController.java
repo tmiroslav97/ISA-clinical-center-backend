@@ -1,6 +1,8 @@
 package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
+import clinic.centersystem.dto.request.ClinicAdminEditReqDTO;
+import clinic.centersystem.dto.request.ClinicAdminReqDTO;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
 import clinic.centersystem.dto.response.ClinicAdministratoreResponse;
 import clinic.centersystem.dto.response.DoctorResponse;
@@ -21,34 +23,31 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RestController
 @RequestMapping(value = "/adm-cli", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ClinicAdminController {
+
     private final ClinicAdminServiceImpl clinicAdminService;
 
 
     public ClinicAdminController(ClinicAdminServiceImpl clinicAdminService) {
         this.clinicAdminService = clinicAdminService;
-
     }
-    @RequestMapping(method = GET, value = "/{admCliId}")
+
+    @RequestMapping(method = GET, value = "/{id}")
     @PreAuthorize("hasRole('ADMINC')")
-    public ResponseEntity<ClinicAdministratoreResponse> clinicAdministrator(@PathVariable Long admCliId) {
-        return new ResponseEntity<>(this.clinicAdminService.clinicAdministrator(admCliId), HttpStatus.CREATED);
+    public ResponseEntity<ClinicAdministratoreResponse> clinicAdministrator(@PathVariable Long id) {
+        return new ResponseEntity<>(clinicAdminService.clinicAdministrator(id), HttpStatus.CREATED);
     }
 
-
-    @RequestMapping(method = POST, value="/add-doctor")
-    public ResponseEntity<String>addDoctor(@RequestBody DoctorRequestDTO doctorRequestDTO){
-        return new ResponseEntity<>(this.clinicAdminService.addDoctor(doctorRequestDTO), HttpStatus.OK);
+    @RequestMapping(method = POST, value = "/reg-clinic-admin")
+    @PreAuthorize("hasRole('CCADMIN')")
+    public ResponseEntity<String> registerClinicAdmin(@RequestBody ClinicAdminReqDTO clinicAdminReqDTO) {
+        return new ResponseEntity<>(clinicAdminService.registerClinicAdmin(clinicAdminReqDTO), HttpStatus.OK);
     }
 
+    @RequestMapping(method = POST, value = "/edit-user-profile")
+    public  ResponseEntity<String>editClinicAdmin(@RequestBody ClinicAdminEditReqDTO clinicAdminEditReqDTO){
+        return  new ResponseEntity<>(clinicAdminService.editClinicAdmin(clinicAdminEditReqDTO), HttpStatus.OK);
+    }
 
-    @RequestMapping(method = POST, value="/add-appointment-type")
-    public ResponseEntity<String>addAppointmentType(@RequestBody AppointmentTypeRequestDTO appointmentTypeRequestDTO){
-        return new ResponseEntity<>(this.clinicAdminService.addAppointmentType(appointmentTypeRequestDTO), HttpStatus.OK);
-    }
-    @RequestMapping(method = GET, value = "/doctors")
-    public ResponseEntity<List<DoctorResponse>> getDoctors() {
-        return new ResponseEntity<List<DoctorResponse>>(this.clinicAdminService.getDoctors(), HttpStatus.OK);
-    }
     /*@RequestMapping(method = GET, value = "/fetch")
     @PreAuthorize("hasRole('ADMINC')")
     public ResponseEntity<List<DoctorResponse>> getDoctors() {

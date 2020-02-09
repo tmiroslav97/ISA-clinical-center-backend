@@ -2,7 +2,7 @@ package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.request.AbsenceRequirementDTO;
 import clinic.centersystem.dto.response.CalendarResponse;
-import clinic.centersystem.model.AbsenceRequirement;
+import clinic.centersystem.model.AbsenceHolidayRequirement;
 import clinic.centersystem.service.PersonnelServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,17 +26,6 @@ public class PersonnelController {
     public PersonnelController(PersonnelServiceImpl personnelService) {
         this.personnelService = personnelService;
     }
-
-    @RequestMapping(method = POST, value = "/abs-hol")
-    public ResponseEntity<String> submitAbsenceRequirement(@RequestBody AbsenceRequirementDTO absenceRequirementDTO) {
-        return new ResponseEntity<>(this.personnelService.submitAbsenceRequirement(absenceRequirementDTO), HttpStatus.OK);
-    }
-
-    @RequestMapping(method = GET, value = "/my-abs-hol/{personnelId}")
-    public ResponseEntity<Set<AbsenceRequirement>> getMyRequirements(@PathVariable Long personnelId) {
-        return new ResponseEntity<>(this.personnelService.getMyRequirements(personnelId), HttpStatus.OK);
-    }
-
 
     @RequestMapping(method = GET, value = "/my-cal/{personnelId}")
     public ResponseEntity<CalendarResponse> getMyCalendar(@PathVariable Long personnelId) {

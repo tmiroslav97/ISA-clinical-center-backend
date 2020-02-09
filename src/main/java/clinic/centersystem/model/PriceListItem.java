@@ -2,15 +2,17 @@ package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Builder
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = DbTableConstants.PRICELISTITEM)
 public class PriceListItem {
@@ -25,11 +27,7 @@ public class PriceListItem {
     @Column(name = DbColumnConstants.PRICE, nullable = false)
     private Float price;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private PriceList priceList;
-
-    public PriceListItem() {
-        // TODO: implement
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Clinic clinic;
 
 }

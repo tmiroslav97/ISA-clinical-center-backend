@@ -2,6 +2,7 @@ package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbTableConstants;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,12 +21,13 @@ public class Calendar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
     private Personnel personnel;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "calendar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<CalendarItem> calendarItems = new HashSet<CalendarItem>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "calendar", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private Set<CalendarItem> calendarItems = new HashSet<>();
 
 }

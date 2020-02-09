@@ -2,7 +2,7 @@ package clinic.centersystem.service.intf;
 
 import clinic.centersystem.dto.request.AbsenceRequirementDTO;
 import clinic.centersystem.dto.response.CalendarResponse;
-import clinic.centersystem.model.AbsenceRequirement;
+import clinic.centersystem.model.AbsenceHolidayRequirement;
 import clinic.centersystem.model.Personnel;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public interface PersonnelService {
 
     String submitAbsenceRequirement(AbsenceRequirementDTO absenceRequirementDTO);
 
-    Set<AbsenceRequirement> getMyRequirements(Long personnelId);
+    Set<AbsenceHolidayRequirement> getMyRequirements(Long personnelId);
 
     CalendarResponse getMyCalendar(Long personnelId);
 }

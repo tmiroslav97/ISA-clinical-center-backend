@@ -13,8 +13,8 @@ public class AbsenceRequirementResponse {
 
     private String status;
 
-    private Long startDate;
+    private String startDate;
 
-    private Long endDate;
+    private String endDate;
 
 }

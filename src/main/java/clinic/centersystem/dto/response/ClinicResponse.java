@@ -18,4 +18,5 @@ public class ClinicResponse {
 
     private String address;
 
+
 }

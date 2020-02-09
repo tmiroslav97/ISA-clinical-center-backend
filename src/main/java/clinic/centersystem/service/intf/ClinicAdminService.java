@@ -17,6 +17,6 @@ public interface ClinicAdminService {
 
     ClinicAdmin saveClinicAdmin(ClinicAdmin clinicAdmin);
 
-
+    String registerClinicAdmin(ClinicAdminReqDTO clinicAdminReqDTO);
 
 }

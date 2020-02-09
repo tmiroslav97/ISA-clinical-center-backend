@@ -13,5 +13,5 @@ public interface AppointmentTypeService {
 
     public void remove(Long id);
 
-    List<AppointmentType> getAppointmentType();
+    List<AppointmentType> getAppointmentType(Long clinicId);
 }

@@ -4,10 +4,12 @@ import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import clinic.centersystem.model.enumeration.RoleEnum;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -18,25 +20,8 @@ import java.util.Set;
 @Table(name = DbTableConstants.PATIENT)
 public class Patient extends User {
 
-    @Builder(builderMethodName = "patientBuilder")
-    public Patient(Long id, String email, String password, String firstName, String lastName,
-                   boolean enabled, RoleEnum role, boolean isFirstLog, Timestamp lastPasswordResetDate,
-                   List<Authority> authorities, String address, String country, String city, String phoneNum, String unoip,
-                   Set<Clinic> clinics, MedicalRecord medicalRecord, Set<Appointment> appointments, Set<AppointmentRequirement> appointmentRequirements,
-                   Set<Surgery> surgeries, boolean isActivated) {
-        super(id, email, password, firstName, lastName, enabled, role, isFirstLog, lastPasswordResetDate, authorities);
-        this.address = address;
-        this.country = country;
-        this.city = city;
-        this.phoneNum = phoneNum;
-        this.unoip = unoip;
-        this.clinics = clinics;
-        this.medicalRecord = medicalRecord;
-        this.appointments = appointments;
-        this.appointmentRequirements = appointmentRequirements;
-        this.surgeries = surgeries;
-        this.isActivated = isActivated;
-    }
+    @Column(name = DbColumnConstants.ISACTIVATED, nullable = false)
+    private boolean isActivated;
 
     @Column(name = DbColumnConstants.ADDRESS, nullable = false)
     private String address;
@@ -53,23 +38,44 @@ public class Patient extends User {
     @Column(name = DbColumnConstants.UNOIP, nullable = false)
     private String unoip;
 
-    @JsonBackReference
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Clinic> clinics;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
     private MedicalRecord medicalRecord;
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Appointment> appointments;
+    @JsonIgnore
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+    private Set<Appointment> appointments = new HashSet<>();
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<AppointmentRequirement> appointmentRequirements;
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<Clinic> clinics = new HashSet<>();
 
-    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Surgery> surgeries;
+    @JsonIgnore
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+    private Set<AppointmentRequirement> appointmentRequirements = new HashSet<>();
 
-    @Column(name = DbColumnConstants.ISACTIVATED, nullable = false)
-    private boolean isActivated;
+    @JsonIgnore
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+    private Set<Surgery> surgeries = new HashSet<>();
+
+    @Builder(builderMethodName = "patientBuilder")
+    public Patient(Long id, String email, String password, String firstName, String lastName,
+                   boolean enabled, boolean isFirstLog, Timestamp lastPasswordResetDate,
+                   List<Authority> authorities, String address, String country, String city, String phoneNum, String unoip,
+                   Set<Clinic> clinics, MedicalRecord medicalRecord, Set<Appointment> appointments, Set<AppointmentRequirement> appointmentRequirements,
+                   Set<Surgery> surgeries, boolean isActivated, Long version) {
+        super(id, email, password, firstName, lastName, enabled,isFirstLog, lastPasswordResetDate, authorities, version);
+        this.address = address;
+        this.country = country;
+        this.city = city;
+        this.phoneNum = phoneNum;
+        this.unoip = unoip;
+        this.clinics = clinics;
+        this.medicalRecord = medicalRecord;
+        this.appointments = appointments;
+        this.appointmentRequirements = appointmentRequirements;
+        this.surgeries = surgeries;
+        this.isActivated = isActivated;
+    }
 
 }

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 @Builder
 @Data
 @AllArgsConstructor
@@ -17,5 +19,7 @@ public class ClinicAdministratoreResponse {
 
     private String lastName;
 
-    private String role;
+    private List<String> roles;
+
+    private Long clinicId;
 }

@@ -15,4 +15,6 @@ public class ClinicRequestDTO {
 
     private String address;
 
+    private String city;
+
 }

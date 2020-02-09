@@ -4,9 +4,10 @@ import clinic.centersystem.converter.AbsenceRequirementConverter;
 import clinic.centersystem.converter.CalendarConverter;
 import clinic.centersystem.dto.request.AbsenceRequirementDTO;
 import clinic.centersystem.dto.response.CalendarResponse;
+import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.*;
 import clinic.centersystem.repository.PersonnelRepository;
-import clinic.centersystem.service.intf.AbsenceRequirementService;
+import clinic.centersystem.service.intf.AbsenceHolidayRequirementService;
 import clinic.centersystem.service.intf.ClinicService;
 import clinic.centersystem.service.intf.PersonnelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +23,14 @@ public class PersonnelServiceImpl implements PersonnelService {
     private PersonnelRepository personnelRepository;
 
     @Autowired
-    private AbsenceRequirementService absenceRequirementService;
+    private AbsenceHolidayRequirementService absenceHolidayRequirementService;
 
     @Autowired
     private ClinicService clinicService;
 
     @Override
     public Personnel findById(Long id) {
-        return this.personnelRepository.findById(id).orElseGet(null);
+        return this.personnelRepository.findById(id).orElseThrow(() -> new ResourceNotExistsException("Personnel doesn't exist"));
     }
 
     @Override
@@ -44,15 +45,15 @@ public class PersonnelServiceImpl implements PersonnelService {
 
     @Override
     public String submitAbsenceRequirement(AbsenceRequirementDTO absenceRequirementDTO) {
-        AbsenceRequirement absenceRequirement = AbsenceRequirementConverter.toCreateAbsenceRequirementFromAbsenceRequest(absenceRequirementDTO);
+        AbsenceHolidayRequirement absenceHolidayRequirement = AbsenceRequirementConverter.toCreateAbsenceRequirementFromAbsenceRequest(absenceRequirementDTO);
         Personnel personnel = this.findById(absenceRequirementDTO.getPersonnelId());
         Clinic clinic = this.clinicService.findById(absenceRequirementDTO.getClinicId());
 
-        absenceRequirement.setClinic(clinic);
-        absenceRequirement.setPersonnel(personnel);
-        clinic.getReqAbs().add(absenceRequirement);
-        personnel.getAbsenceRequirements().add(absenceRequirement);
-        absenceRequirement = this.absenceRequirementService.save(absenceRequirement);
+        absenceHolidayRequirement.setClinic(clinic);
+        absenceHolidayRequirement.setPersonnel(personnel);
+        clinic.getReqAbs().add(absenceHolidayRequirement);
+        personnel.getAbsenceHolidayRequirements().add(absenceHolidayRequirement);
+        absenceHolidayRequirement = this.absenceHolidayRequirementService.save(absenceHolidayRequirement);
         clinic = this.clinicService.saveClinic(clinic);
         personnel = this.save(personnel);
 
@@ -60,22 +61,22 @@ public class PersonnelServiceImpl implements PersonnelService {
     }
 
     @Override
-    public Set<AbsenceRequirement> getMyRequirements(Long personnelId) {
+    public Set<AbsenceHolidayRequirement> getMyRequirements(Long personnelId) {
         Personnel personnel = this.findById(personnelId);
-        Set<AbsenceRequirement> absenceRequirements = personnel.getAbsenceRequirements();
+        Set<AbsenceHolidayRequirement> absenceHolidayRequirements = personnel.getAbsenceHolidayRequirements();
 
-        return absenceRequirements;
+        return absenceHolidayRequirements;
     }
 
     @Override
-    public CalendarResponse getMyCalendar(Long personnelId){
+    public CalendarResponse getMyCalendar(Long personnelId) {
         Personnel personnel = this.findById(personnelId);
         Calendar calendar = personnel.getCalendar();
         CalendarResponse calendarResponse = CalendarConverter.toCreateCalendarResponseFromCalendar(calendar);
-        for(CalendarItem calendarItem : calendar.getCalendarItems()){
+        for (CalendarItem calendarItem : calendar.getCalendarItems()) {
             calendarResponse.getCalendarItemResponses().add(CalendarConverter.toCreateCalendarItemResponseFromCalendarItem(calendarItem));
         }
 
-        return  calendarResponse;
+        return calendarResponse;
     }
 }

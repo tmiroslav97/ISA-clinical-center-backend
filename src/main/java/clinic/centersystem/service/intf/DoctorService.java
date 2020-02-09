@@ -17,11 +17,15 @@ public interface DoctorService {
 
     Doctor save(DoctorRequestDTO doctorRequestDTO);
 
-    public void remove(Long id);
+    void remove(Long id);
 
     DoctorResponse getDoctorById(Long id);
 
     List<DoctorResponse> getDoctors();
 
     List<Doctor> searchDoctorByName(String name);
+
+    List<DoctorResponse> findByClinicId(Long clinicId);
+
+    Doctor findOneById(Long id);
 }

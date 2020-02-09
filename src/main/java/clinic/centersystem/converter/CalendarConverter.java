@@ -6,6 +6,8 @@ import clinic.centersystem.model.Appointment;
 import clinic.centersystem.model.Calendar;
 import clinic.centersystem.model.CalendarItem;
 import clinic.centersystem.model.Surgery;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,53 +18,33 @@ public class CalendarConverter {
     public static CalendarResponse toCreateCalendarResponseFromCalendar(Calendar calendar) {
         return CalendarResponse.builder()
                 .id(calendar.getId())
-                .calendarItemResponses(new HashSet<CalendarItemResponse>())
+                .calendarItemResponses(new HashSet<>())
                 .build();
     }
 
     public static CalendarItemResponse toCreateCalendarItemResponseFromCalendarItem(CalendarItem calendarItem) {
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:ss");
+        String start = dtf.print(calendarItem.getStart());
+        String end = dtf.print(calendarItem.getEnd());
         return CalendarItemResponse.builder()
                 .id(calendarItem.getId())
-                .start(calendarItem.getStart())
-                .end(calendarItem.getEnd())
+                .start(start)
+                .end(end)
                 .title(calendarItem.getTitle())
                 .type(calendarItem.getType())
                 .typeId(calendarItem.getTypeId())
-                .up_down_ind(calendarItem.getUp_down_ind())
+                .allday(calendarItem.getAllDay())
                 .build();
     }
 
-    public static CalendarItem toCreateCalendarItemFromAppointmet(Appointment appointment){
-        Date startDate = new java.util.Date(appointment.getStartTime()*1000L);
-        Date endDate = new java.util.Date(appointment.getEndTime()*1000L);
-        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String startDateString = sdf.format(startDate);
-        String endDateString = sdf.format(endDate);
-        return CalendarItem.builder()
-                .start(startDateString)
-                .end(endDateString)
-                .title(appointment.getType().getType())
-                .up_down_ind("Y")
-                .type("Appointment")
-                .typeId(appointment.getId())
-                .build();
-
+    public static CalendarItem toCreateCalendarItemFromAppointmet(Appointment appointment) {
+        //metoda za pravljenje calendar itema od pregleda
+        return null;
     }
 
-    public static CalendarItem toCreateCalendarItemFromSurgery(Surgery surgery){
-        Date startDate = new java.util.Date(surgery.getStartTime()*1000L);
-        Date endDate = new java.util.Date(surgery.getEndTime()*1000L);
-        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String startDateString = sdf.format(startDate);
-        String endDateString = sdf.format(endDate);
-        return CalendarItem.builder()
-                .start(startDateString)
-                .end(endDateString)
-                .title("Surgery")
-                .up_down_ind("Y")
-                .typeId(surgery.getId())
-                .type("sur")
-                .build();
+    public static CalendarItem toCreateCalendarItemFromSurgery(Surgery surgery) {
+        //metoda za pravljenje calendar itema od operacije
+        return null;
 
     }
 }

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 
 @Data
 @AllArgsConstructor
@@ -15,8 +17,8 @@ public class LoginUserResponse {
 
     private String token;
 
-    private boolean isFirstLog;
+    private boolean firstLogin;
 
-    private String role;
+    private List<String> roles;
 
 }

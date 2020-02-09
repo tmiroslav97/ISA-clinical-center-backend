@@ -45,10 +45,6 @@ public class User implements UserDetails {
     @Column(name = DbColumnConstants.ENABLED, nullable = false)
     private boolean enabled;
 
-    @Column(name = DbColumnConstants.ROLE, nullable = false)
-    @Enumerated(EnumType.STRING)
-    private RoleEnum role;
-
     @Column(name = DbColumnConstants.FIRSTLOG, nullable = false)
     private boolean isFirstLog;
 
@@ -60,6 +56,9 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     private List<Authority> authorities;
+
+    @Version
+    private Long version = 0L;
 
     public String getUsername() {
         return this.email;

@@ -4,7 +4,6 @@ import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
-import org.w3c.dom.views.DocumentView;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -26,52 +25,59 @@ public class Clinic {
     @Column(name = DbColumnConstants.NAME, unique = true, nullable = false)
     private String name;
 
-    @Column(name = DbColumnConstants.ADDRESS, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.ADDRESS, nullable = false)
     private String address;
 
-    @Column(name = DbColumnConstants.DESCRIPTION, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.DESCRIPTION, nullable = false)
     private String description;
 
-    @Column(name = DbColumnConstants.SUMRATING, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.SUMRATING, nullable = false)
     private Float sumRating;
 
-    @Column(name = DbColumnConstants.CNTRATING, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.CNTRATING, nullable = false)
     private Float cntRating;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     private BusinessReport busReport;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private PriceList priceList;
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
+    private Set<PriceListItem> priceList = new HashSet<>();
 
-    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Doctor> doctors = new HashSet<Doctor>();
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
+    private Set<Doctor> doctors = new HashSet<>();
 
-    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Nurse> nurses = new HashSet<Nurse>();
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
+    private Set<Nurse> nurses = new HashSet<>();
 
-    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<ClinicAdmin> clinicAdmins = new HashSet<ClinicAdmin>();
-
-    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<SurgExRoom> surExRooms = new HashSet<SurgExRoom>();
-
-    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Appointment> appointments = new HashSet<Appointment>();
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
+    private Set<ClinicAdmin> clinicAdmins = new HashSet<>();
 
     @JsonBackReference
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Patient> patients = new HashSet<Patient>();
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
+    private Set<AppointmentType> appointmentTypes = new HashSet<>();
 
     @JsonBackReference
-    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<AbsenceRequirement> reqAbs = new HashSet<AbsenceRequirement>();
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
+    private Set<Room> rooms = new HashSet<>();
 
-    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<AppointmentRequirement> appReqs = new HashSet<AppointmentRequirement>();
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
+    private Set<Appointment> appointments = new HashSet<>();
 
-    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<SurgeryRequirement> surReqs = new HashSet<SurgeryRequirement>();
+    @JsonBackReference
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<Patient> patients = new HashSet<>();
 
+    @JsonBackReference
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
+    private Set<AbsenceHolidayRequirement> reqAbs = new HashSet<>();
+
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
+    private Set<AppointmentRequirement> appReqs = new HashSet<>();
+
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
+    private Set<SurgeryRequirement> surReqs = new HashSet<>();
+
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
+    private Set<Prescription> prescriptions = new HashSet<>();
 
 }

@@ -18,19 +18,19 @@ public class BusinessReport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = DbColumnConstants.CLINICRATING, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.CLINICRATING, nullable = false)
     private Float clinicRating;
 
-    @Column(name = DbColumnConstants.DOCTORRATING, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.DOCTORRATING,  nullable = false)
     private Float doctorRating;
 
-    @Column(name = DbColumnConstants.GRAPHIC, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.GRAPHIC,  nullable = false)
     private Float graphic;
 
-    @Column(name = DbColumnConstants.INCOME, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.INCOME,nullable = false)
     private Float income;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     private Clinic clinic;
 
     public BusinessReport() {

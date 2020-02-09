@@ -16,5 +16,5 @@ public class CalendarItemResponse {
     private String end;
     private String type;
     private Long typeId;
-    private String up_down_ind;
+    private String allday;
 }

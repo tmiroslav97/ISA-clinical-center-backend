@@ -1,7 +1,6 @@
 package clinic.centersystem.converter;
 
 import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
-import clinic.centersystem.dto.response.AppointmentTypeResponse;
 import clinic.centersystem.model.AppointmentType;
 
 public class AppointmentTypeConverter {

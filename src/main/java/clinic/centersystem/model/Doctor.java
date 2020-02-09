@@ -3,7 +3,7 @@ package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
-import clinic.centersystem.model.enumeration.RoleEnum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -21,34 +22,38 @@ import java.util.Set;
 @Table(name = DbTableConstants.DOCTOR)
 public class Doctor extends Personnel {
 
-    @Column(name = DbColumnConstants.SUMRATING, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.SUMRATING, nullable = false)
     private Float sumRating;
 
-    @Column(name = DbColumnConstants.CNTRATING, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.CNTRATING, nullable = false)
     private Integer cntRating;
 
-    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<AppointmentRequirement> appReqs;
-
-    @Column(name = DbColumnConstants.STARTTIME, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.STARTTIME, nullable = false)
     private Integer startTime;
 
-    @Column(name = DbColumnConstants.ENDTIME, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.ENDTIME, nullable = false)
     private Integer endTime;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
+    private Set<Appointment> appointments = new HashSet<>();
+
+    @JsonBackReference
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<Surgery> surgeries = new HashSet<>();
 
     @Builder(builderMethodName = "doctorBuilder")
     public Doctor(Long id, String email, String password, String firstName, String lastName,
-                  boolean enabled, RoleEnum role, boolean isFirstLog, Timestamp lastPasswordResetDate,
+                  boolean enabled, boolean isFirstLog, Timestamp lastPasswordResetDate,
                   List<Authority> authorities, Clinic clinic, Calendar calendar,
-                  Set<AbsenceRequirement> absenceRequirements, Set<Appointment> appointments, Float sumRating,
-                  Integer cntRating, Set<AppointmentRequirement> appReqs, Integer startTime, Integer endTime) {
-        super(id, email, password, firstName, lastName, enabled, role, isFirstLog, lastPasswordResetDate, authorities, clinic, calendar, absenceRequirements, appointments);
+                  Set<AbsenceHolidayRequirement> absenceHolidayRequirements, Set<Appointment> appointments, Set<Surgery> surgeries, Float sumRating,
+                  Integer cntRating, Integer startTime, Integer endTime, Long version) {
+        super(id, email, password, firstName, lastName, enabled, isFirstLog, lastPasswordResetDate, authorities, clinic, calendar, absenceHolidayRequirements, version);
         this.sumRating = sumRating;
         this.cntRating = cntRating;
-        this.appReqs = appReqs;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.appointments = appointments;
+        this.surgeries = surgeries;
     }
-
-
 }
