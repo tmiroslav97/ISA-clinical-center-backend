@@ -14,7 +14,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>centersystem</name>
     <description>Faculty project</description>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
 
     <properties>
@@ -160,7 +160,7 @@
                         <phase>generate-resources</phase>
                         <configuration>
                             <target>
-                                <copy todir="${project.build.directory}/classes/static">
+                                <copy todir="${project.build.directory}/classes/public">
                                     <fileset dir="${project.basedir}/client/build"/>
                                 </copy>
                             </target>
