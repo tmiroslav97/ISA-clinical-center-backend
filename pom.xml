@@ -14,7 +14,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>centersystem</name>
     <description>Faculty project</description>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
 
     <properties>
