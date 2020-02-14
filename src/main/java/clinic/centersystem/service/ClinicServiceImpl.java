@@ -10,6 +10,7 @@ import clinic.centersystem.model.Clinic;
 import clinic.centersystem.repository.ClinicRepository;
 import clinic.centersystem.service.intf.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 @Service
 public class ClinicServiceImpl implements ClinicService {
 
+    @Lazy
     @Autowired
     private ClinicRepository clinicRepository;
 

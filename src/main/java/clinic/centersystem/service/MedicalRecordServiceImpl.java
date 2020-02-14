@@ -6,11 +6,13 @@ import clinic.centersystem.model.MedicalRecord;
 import clinic.centersystem.repository.MedicalRecordRepository;
 import clinic.centersystem.service.intf.MedicalRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MedicalRecordServiceImpl implements MedicalRecordService {
 
+    @Lazy
     @Autowired
     private MedicalRecordRepository medicalRecordRepository;
 

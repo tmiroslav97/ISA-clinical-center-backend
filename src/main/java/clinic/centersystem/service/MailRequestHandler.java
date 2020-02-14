@@ -2,6 +2,7 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.dto.request.MailRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
@@ -10,6 +11,7 @@ import org.springframework.transaction.event.TransactionalEventListener;
 @Component
 public class MailRequestHandler {
 
+    @Lazy
     @Autowired
     private EmailService emailService;
 

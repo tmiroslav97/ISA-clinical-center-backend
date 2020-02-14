@@ -5,6 +5,7 @@ import clinic.centersystem.repository.AuthorityRepository;
 
 import clinic.centersystem.service.intf.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 @Service
 public class AuthorityServiceImpl implements AuthorityService {
 
+    @Lazy
     @Autowired
     private AuthorityRepository authorityRepository;
 

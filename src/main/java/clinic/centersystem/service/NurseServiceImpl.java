@@ -7,6 +7,7 @@ import clinic.centersystem.model.Nurse;
 import clinic.centersystem.repository.NurseRepository;
 import clinic.centersystem.service.intf.NurseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import java.util.List;
 @Service
 public class NurseServiceImpl implements NurseService {
 
+    @Lazy
     @Autowired
     private NurseRepository nurseRepository;
 

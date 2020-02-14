@@ -15,6 +15,7 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,27 +26,35 @@ import java.util.stream.Collectors;
 @Service
 public class MedicalReportServiceImpl implements MedicalReportService {
 
+    @Lazy
     @Autowired
     private MedicalReportRepository medicalReportRepository;
 
+    @Lazy
     @Autowired
     private AppointmentService appointmentService;
 
+    @Lazy
     @Autowired
     private MedicineService medicineService;
 
+    @Lazy
     @Autowired
     private ClinicService clinicService;
 
+    @Lazy
     @Autowired
     private PrescriptionService prescriptionService;
 
+    @Lazy
     @Autowired
     private DiagnoseService diagnoseService;
 
+    @Lazy
     @Autowired
     private MedicalRecordService medicalRecordService;
 
+    @Lazy
     @Autowired
     private DoctorService doctorService;
 

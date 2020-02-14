@@ -33,21 +33,27 @@ public class AuthenticationService {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationService.class);
 
+    @Lazy
     @Autowired
     private TokenUtils tokenUtils;
 
+    @Lazy
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Lazy
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
+    @Lazy
     @Autowired
     private UserService userService;
 
+    @Lazy
     @Autowired
     private PatientService patientService;
 
+    @Lazy
     @Autowired
     private RegistrationRequirementService registrationRequirementService;
 

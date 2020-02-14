@@ -8,6 +8,7 @@ import clinic.centersystem.repository.AppointmentRepository;
 import clinic.centersystem.service.intf.AppointmentService;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import java.util.List;
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
 
+    @Lazy
     @Autowired
     private AppointmentRepository appointmentRepository;
 

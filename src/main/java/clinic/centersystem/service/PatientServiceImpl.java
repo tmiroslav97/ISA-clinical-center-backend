@@ -15,6 +15,7 @@ import clinic.centersystem.repository.AuthorityRepository;
 import clinic.centersystem.repository.PatientRepository;
 import clinic.centersystem.service.intf.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,15 +33,19 @@ import java.util.stream.Collectors;
 @Service
 public class PatientServiceImpl implements PatientService {
 
+    @Lazy
     @Autowired
     private PatientRepository patientRepository;
 
+    @Lazy
     @Autowired
     private AuthorityService authorityService;
 
+    @Lazy
     @Autowired
     private ClinicService clinicService;
 
+    @Lazy
     @Autowired
     private MedicalRecordService medicalRecordService;
 

@@ -21,15 +21,19 @@ import java.util.List;
 @Service
 public class ClinicAdminServiceImpl implements ClinicAdminService {
 
+    @Lazy
     @Autowired
     private ClinicAdminRepository clinicAdminRepository;
 
+    @Lazy
     @Autowired
     private DoctorServiceImpl doctorService;
 
+    @Lazy
     @Autowired
     private AppointmentTypeServiceImpl appointmentTypeService;
 
+    @Lazy
     @Autowired
     private UserService userService;
 
@@ -37,12 +41,15 @@ public class ClinicAdminServiceImpl implements ClinicAdminService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Lazy
     @Autowired
     private ClinicService clinicService;
 
+    @Lazy
     @Autowired
     private ClinicAdminService clinicAdminService;
 
+    @Lazy
     @Autowired
     private EmailService emailService;
 

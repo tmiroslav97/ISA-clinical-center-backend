@@ -5,6 +5,7 @@ import clinic.centersystem.model.Surgery;
 import clinic.centersystem.repository.SurgeryRepository;
 import clinic.centersystem.service.intf.SurgeryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SurgeryServiceImpl implements SurgeryService {
 
+    @Lazy
     @Autowired
     SurgeryRepository surgeryRepository;
 

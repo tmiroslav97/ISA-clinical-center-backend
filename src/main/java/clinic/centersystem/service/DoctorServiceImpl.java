@@ -11,6 +11,7 @@ import clinic.centersystem.service.intf.AuthorityService;
 import clinic.centersystem.service.intf.ClinicService;
 import clinic.centersystem.service.intf.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -23,18 +24,23 @@ import java.util.stream.Collectors;
 @Service
 public class DoctorServiceImpl implements DoctorService {
 
+    @Lazy
     @Autowired
     private DoctorRepository doctorRepository;
 
+    @Lazy
     @Autowired
     private ClinicService clinicService;
 
+    @Lazy
     @Autowired
     private AppointmentService appointmentService;
 
+    @Lazy
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Lazy
     @Autowired
     private AuthorityService authorityService;
 

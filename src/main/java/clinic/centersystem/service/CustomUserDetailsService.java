@@ -24,6 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     protected final Log LOGGER = LogFactory.getLog(getClass());
 
+    @Lazy
     @Autowired
     private UserRepository userRepository;
 
@@ -31,6 +32,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Lazy
     @Autowired
     private AuthenticationManager authenticationManager;
 

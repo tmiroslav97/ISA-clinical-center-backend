@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 @Service
 public class RegistrationRequirementServiceImpl implements RegistrationRequirementService {
 
+    @Lazy
     @Autowired
     private RegistrationRequirementRepository registrationRequirementRepository;
 
@@ -37,15 +38,19 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Lazy
     @Autowired
     private UserService userService;
 
+    @Lazy
     @Autowired
     private PatientService patientService;
 
+    @Lazy
     @Autowired
     private EmailService emailService;
 
+    @Lazy
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
 

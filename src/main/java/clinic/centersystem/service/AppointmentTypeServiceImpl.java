@@ -11,6 +11,7 @@ import clinic.centersystem.repository.AppointmentTypeRepository;
 import clinic.centersystem.service.intf.AppointmentTypeService;
 import clinic.centersystem.service.intf.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,9 +19,11 @@ import java.util.List;
 @Service
 public class AppointmentTypeServiceImpl implements AppointmentTypeService {
 
+    @Lazy
     @Autowired
     private AppointmentTypeRepository appointmentTypeRepository;
 
+    @Lazy
     @Autowired
     private ClinicService clinicService;
 

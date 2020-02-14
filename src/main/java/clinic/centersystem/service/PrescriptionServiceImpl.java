@@ -15,6 +15,7 @@ import clinic.centersystem.service.intf.MedicalReportService;
 import clinic.centersystem.service.intf.NurseService;
 import clinic.centersystem.service.intf.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,15 +27,19 @@ import java.util.stream.Collectors;
 @Service
 public class PrescriptionServiceImpl implements PrescriptionService {
 
+    @Lazy
     @Autowired
     private PrescriptionRepository prescriptionRepository;
 
+    @Lazy
     @Autowired
     private PrescriptionService prescriptionService;
 
+    @Lazy
     @Autowired
     private NurseService nurseService;
 
+    @Lazy
     @Autowired
     private AppointmentService appointmentService;
 

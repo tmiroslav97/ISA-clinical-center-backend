@@ -16,6 +16,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -35,33 +36,43 @@ import java.util.stream.Collectors;
 @Service
 public class SurgeryRequirementServiceImpl implements SurgeryRequirementService {
 
+    @Lazy
     @Autowired
     private SurgeryRequirementRepository surgeryRequirementRepository;
 
+    @Lazy
     @Autowired
     private RoomService roomService;
 
+    @Lazy
     @Autowired
     private RoomCalendarService roomCalendarService;
 
+    @Lazy
     @Autowired
     private DoctorService doctorService;
 
+    @Lazy
     @Autowired
     private CalendarService calendarService;
 
+    @Lazy
     @Autowired
     private CalendarItemService calendarItemService;
 
+    @Lazy
     @Autowired
     private PatientService patientService;
 
+    @Lazy
     @Autowired
     private SurgeryService surgeryService;
 
+    @Lazy
     @Autowired
     private EmailService emailService;
 
+    @Lazy
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
 

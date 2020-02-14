@@ -1,6 +1,7 @@
 package clinic.centersystem.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -11,9 +12,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailService {
 
+    @Lazy
     @Autowired
     private JavaMailSender javaMailSender;
 
+    @Lazy
     @Autowired
     private Environment env;
 

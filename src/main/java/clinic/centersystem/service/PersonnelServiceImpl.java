@@ -11,6 +11,7 @@ import clinic.centersystem.service.intf.AbsenceHolidayRequirementService;
 import clinic.centersystem.service.intf.ClinicService;
 import clinic.centersystem.service.intf.PersonnelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,12 +20,15 @@ import java.util.Set;
 @Service
 public class PersonnelServiceImpl implements PersonnelService {
 
+    @Lazy
     @Autowired
     private PersonnelRepository personnelRepository;
 
+    @Lazy
     @Autowired
     private AbsenceHolidayRequirementService absenceHolidayRequirementService;
 
+    @Lazy
     @Autowired
     private ClinicService clinicService;
 

@@ -8,6 +8,7 @@ import clinic.centersystem.model.SurgeryRequirement;
 import clinic.centersystem.repository.MedicineRepository;
 import clinic.centersystem.service.intf.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import java.util.Set;
 @Service
 public class MedicineServiceImpl implements MedicineService {
 
+    @Lazy
     @Autowired
     private MedicineRepository medicineRepository;
 

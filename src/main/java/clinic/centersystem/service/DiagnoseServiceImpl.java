@@ -9,6 +9,7 @@ import clinic.centersystem.model.Medicine;
 import clinic.centersystem.repository.DiagnoseRepository;
 import clinic.centersystem.service.intf.DiagnoseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import java.util.List;
 @Service
 public class DiagnoseServiceImpl implements DiagnoseService {
 
+    @Lazy
     @Autowired
     private DiagnoseRepository diagnoseRepository;
 

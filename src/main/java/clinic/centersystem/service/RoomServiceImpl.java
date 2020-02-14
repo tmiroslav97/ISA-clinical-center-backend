@@ -21,6 +21,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -35,12 +36,15 @@ import java.util.List;
 @Service
 public class RoomServiceImpl implements RoomService {
 
+    @Lazy
     @Autowired
     private RoomRepository roomRepository;
 
+    @Lazy
     @Autowired
     private RoomCalendarService roomCalendarService;
 
+    @Lazy
     @Autowired
     private ClinicService clinicService;
 
