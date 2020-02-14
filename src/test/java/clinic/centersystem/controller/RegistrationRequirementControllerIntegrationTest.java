@@ -51,7 +51,7 @@ public class RegistrationRequirementControllerIntegrationTest {
 
     @Before
     public void login() {
-        ResponseEntity<LoginUserResponse> responseEntity = testRestTemplate.postForEntity("/sec/login", new JwtAuthenticationRequest("tomic.miroslav97@gmail.com", "123"), LoginUserResponse.class);
+        ResponseEntity<LoginUserResponse> responseEntity = testRestTemplate.postForEntity("/sec/login", new JwtAuthenticationRequest("tomic.miroslav97@gmail.com", "12345"), LoginUserResponse.class);
         accessToken = "Bearer " + responseEntity.getBody().getToken();
     }
 

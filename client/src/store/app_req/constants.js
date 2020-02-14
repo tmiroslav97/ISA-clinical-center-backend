@@ -1,1 +1,0 @@
-export const ADD_APPOINTEMNT_REQUIREMENT = 'add_appointment_requirement';

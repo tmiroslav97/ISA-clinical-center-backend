@@ -57,7 +57,7 @@ public class RegistrationRequirementEnd2EndTest {
         loginPage.ensureIsDisplayedTxtEmail();
         loginPage.getTxtEmail().sendKeys("tomic.miroslav97@gmail.com");
         loginPage.ensureIsDisplayedTxtPass();
-        loginPage.getTxtPass().sendKeys("123");
+        loginPage.getTxtPass().sendKeys("12345");
         loginPage.ensureIsDisplayedBtnLogin();
         loginPage.getBtnLogin().click();
 
